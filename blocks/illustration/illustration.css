@@ -1,6 +1,9 @@
 @import url(./__image/illustration__image.css);
 @import url(./__item/illustration__item.css);
 @import url(./__text/illustration__text.css);
+@import url(./__heart/illustration__heart.css);
+@import url(./__title/illustration__title.css);
+@import url(./__heart/illustration__heart.css);
 
 .illustration{
   margin: 0 auto;
