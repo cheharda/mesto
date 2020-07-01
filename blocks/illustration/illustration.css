@@ -1,0 +1,19 @@
+@import url(./__image/illustration__image.css);
+@import url(./__item/illustration__item.css);
+@import url(./__text/illustration__text.css);
+
+.illustration{
+  margin: 0 auto;
+  margin-top: 55px;
+  max-width: 882px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-gap: 16px;
+}
+
+@media screen and (max-width: 667px) {
+  .illustration{
+    margin-top: 36px;
+    grid-gap: 20px;
+  }
+}
