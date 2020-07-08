@@ -9,6 +9,7 @@ const jobInput = formElement.querySelector(".popup__input_job");
 const profileInfo = document.querySelector(".profile__info");
 const profileTitle = profileInfo.querySelector(".profile__title");
 const profileSubTitle = profileInfo.querySelector(".profile__subtitle");
+const editButtonTag = '<button type="button" class="profile__edit-button" name="editButton"></button>'
 
 function showClick() {
   popupOpened.classList.add("popup_opened");
@@ -23,6 +24,7 @@ function closeForm() {
 function formElementSubmitHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
+  profileTitle.insertAdjacentHTML('beforeend', editButtonTag);
   profileSubTitle.textContent = jobInput.value;
   closeForm();
 }

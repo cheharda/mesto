@@ -1,9 +1,8 @@
 .popup__close-button{
-  padding: 0px;
   background-image: url(../../../images/closeIcon.svg);
+  padding: 0px;
   background-size: cover;
-  background-color: inherit;
-  color: white;
+  background-color: transparent;
   border: none;
   max-width: 40px;
   min-height: 40px;
