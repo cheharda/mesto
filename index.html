@@ -11,58 +11,63 @@
       <header class="header">
         <img class="header__logo" src="./images/Vector.svg" alt="Логотип сайта">
       </header>
-      <section class="profile">
+      <main class="content">
+        <section class="profile">
           <img class="profile__avatar" src="./images/kusto.png" alt="Фотография Жака Кусто в красной шапочке">
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто <button type="button" class="profile__edit-button" name="editButton"></button></h1>
-            <p class="profile__subtitle">Исследователь океана</p>
+            <div class="profile__headings">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <p class="profile__subtitle">Исследователь океана</p>
+            </div>
+            <button type="button" class="profile__edit-button" name="editButton"></button>
         </div>
-        <img class="profile__add-button" src="./images/addButton.svg" alt="Кнопка добавления"></img>
+        <button type="button" class="profile__add-button" name="addButton"></button>
       </section>
       <section class="illustration">
         <figure class="illustration__item">
           <img class="illustration__image" src="./images/karach.jpg" alt="ледник">
-          <div class="illustration__text">
+          <figcaption class="illustration__text">
             <h4 class="illustration__title">Карачаево-Черкесия</h4>
-            <img class="illustration__heart" src="./images/heart.svg" alt="иконка сердечко">
-          </div>
+            <button type="button" class="illustration__heart" name="likeButton"></button>
+          </figcaption>
         </figure>
         <figure class="illustration__item">
           <img class="illustration__image" src="./images/el.jpg" alt="вид на горы сверху">
-          <div class="illustration__text">
+          <figcaption class="illustration__text">
             <h4 class="illustration__title">Гора Эльбрус</h4>
-            <img class="illustration__heart" src="./images/heart.svg" alt="иконка сердечко">
-          </div>
+            <button type="button" class="illustration__heart" name="likeButton"></button>
+          </figcaption>
         </figure>
         <figure class="illustration__item">
           <img class="illustration__image" src="./images/dom.jpg" alt="альпинисты">
-          <div class="illustration__text">
+          <figcaption class="illustration__text">
             <h4 class="illustration__title">Домбай</h4>
-            <img class="illustration__heart" src="./images/heart.svg" alt="иконка сердечко">
-          </div>
+            <button type="button" class="illustration__heart" name="likeButton"></button>
+          </figcaption>
         </figure>
         <figure class="illustration__item">
           <img class="illustration__image" src="./images/el.jpg" alt="вид на горы сверху">
-          <div class="illustration__text">
+          <figcaption class="illustration__text">
             <h4 class="illustration__title">Гора Эльбрус</h4>
-            <img class="illustration__heart" src="./images/heart.svg" alt="иконка сердечко">
-          </div>
+            <button type="button" class="illustration__heart" name="likeButton"></button>
+          </figcaption>
         </figure>
         <figure class="illustration__item">
           <img class="illustration__image" src="./images/dom.jpg" alt="ледник">
-          <div class="illustration__text">
+          <figcaption class="illustration__text">
             <h4 class="illustration__title">Домбай</h4>
-            <img class="illustration__heart" src="./images/heart.svg" alt="иконка сердечко">
-          </div>
+            <button type="button" class="illustration__heart" name="likeButton"></button>
+          </figcaption>
         </figure>
         <figure class="illustration__item">
           <img class="illustration__image" src="./images/karach.jpg" alt="альпинисты">
-          <div class="illustration__text">
+          <figcaption class="illustration__text">
             <h4 class="illustration__title">Карачаево-Черкесия</h4>
-            <img class="illustration__heart" src="./images/heart.svg" alt="иконка сердечко">
-          </div>
+            <button type="button" class="illustration__heart" name="likeButton"></button>
+          </figcaption>
         </figure>
       </section>
+      </main>
       <footer class="footer">
         <p class="footer__place">&#169; 2020. Mesto Russia</p>
       </footer>
@@ -73,10 +78,11 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <input name="name" class="popup__input popup__input_name" type="text">
             <input name="job" class="popup__input popup__input_job" type="text">
-          <button type="submit" class="popup__save-button">Сохранить</button>
+            <button type="submit" class="popup__save-button">Сохранить</button>
           </form>
+        </div>
       </section>
     </div>
-    <script src="index.js"></script>
+    <script src="./script/script.js"></script>
   </body>
 </html>

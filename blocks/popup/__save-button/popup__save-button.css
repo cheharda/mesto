@@ -11,4 +11,11 @@
 }
 .popup__save-button:hover{
   background: rgba(0, 0, 0, 0.8);
+  transition: ease-in-out .3s;
+}
+
+@media screen and (max-width:320px){
+  .popup__save-button{
+    max-width: 200px;
+  }
 }

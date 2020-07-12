@@ -1,16 +1,17 @@
 .profile__title{
   margin: 0 auto;
-  margin-top: 18px;
   margin-left: 0px;
   font-size: 42px;
   line-height: 56px;
+  font-style: normal;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 667px) {
   .profile__title{
-    margin: 0 auto;
-    align-self: center;
     font-size: 27px;
-    line-height: 56px;
   }
 }

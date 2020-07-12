@@ -1,14 +1,16 @@
 .profile__info{
   margin: 0 auto;
   margin-left: 30px;
+  padding-top: 18px;
   display: flex;
-  flex-direction: column;
   color: white;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 667px) {
   .profile__info{
-    margin: 0 auto;
     margin-top: 14px;
+    margin-left: 70px;
   }
 }
