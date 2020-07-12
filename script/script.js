@@ -18,8 +18,8 @@ function showClick() {
 
 function closeForm() {
   popupOpened.classList.remove("popup_opened");
-  formElement.reset();
 }
+
 function formElementSubmitHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
