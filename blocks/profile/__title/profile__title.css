@@ -6,12 +6,12 @@
   font-style: normal;
   font-weight: 500;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 667px) {
   .profile__title{
     font-size: 27px;
+    min-width: 201px;
   }
 }

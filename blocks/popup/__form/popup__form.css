@@ -1,6 +1,6 @@
 .popup__form{
   margin: 0 auto;
-  position: relative;
+  position: fixed;
   background-color: white;
   color: black;
   box-sizing: border-box;
@@ -11,13 +11,13 @@
   padding: 34px 36px 36px 36px;
   max-width: 430px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  left: 495px;
-  top: 195px;
+  left: 25%;
+  top: 30%;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 630px) {
   .popup__form{
     max-width: 270px;
-    left: 15px;
+    left: 10%;
   }
 }

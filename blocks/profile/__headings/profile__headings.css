@@ -2,3 +2,9 @@
   box-sizing: border-box;
   max-width: 305px;
 }
+
+@media screen and (max-width: 667px) {
+  .profile__headings{
+    min-width: 201px;
+  }
+}
