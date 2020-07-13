@@ -5,6 +5,6 @@
 
 @media screen and (max-width: 667px) {
   .profile__headings{
-    min-width: 201px;
+    max-width: 201px;
   }
 }
