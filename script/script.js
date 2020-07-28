@@ -77,10 +77,10 @@ function createCard(data) {
     imagePopupImg.src = data.link;
     imagePopupFigcapture.textContent = data.name;
     togglePopup(imagePopup);
+  };
 
     cardImage.addEventListener("click", clickImage);
     return cardElement;
-  };
 }
 
 function renderCard(data) {
