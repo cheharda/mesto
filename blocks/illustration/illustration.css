@@ -4,6 +4,8 @@
 @import url(./__heart/illustration__heart.css);
 @import url(./__title/illustration__title.css);
 @import url(./__heart/illustration__heart.css);
+@import url(./__del-button/illustration__del-button.css);
+@import url(./__heart/_active/illustration__heart_active.css);
 
 .illustration{
   margin: 0 auto;

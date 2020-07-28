@@ -24,65 +24,53 @@
         <button type="button" class="profile__add-button" name="addButton"></button>
       </section>
       <section class="illustration">
-        <figure class="illustration__item">
-          <img class="illustration__image" src="./images/karach.jpg" alt="ледник">
-          <figcaption class="illustration__text">
-            <h4 class="illustration__title">Карачаево-Черкесия</h4>
-            <button type="button" class="illustration__heart" name="likeButton"></button>
-          </figcaption>
-        </figure>
-        <figure class="illustration__item">
-          <img class="illustration__image" src="./images/el.jpg" alt="вид на горы сверху">
-          <figcaption class="illustration__text">
-            <h4 class="illustration__title">Гора Эльбрус</h4>
-            <button type="button" class="illustration__heart" name="likeButton"></button>
-          </figcaption>
-        </figure>
-        <figure class="illustration__item">
-          <img class="illustration__image" src="./images/dom.jpg" alt="альпинисты">
-          <figcaption class="illustration__text">
-            <h4 class="illustration__title">Домбай</h4>
-            <button type="button" class="illustration__heart" name="likeButton"></button>
-          </figcaption>
-        </figure>
-        <figure class="illustration__item">
-          <img class="illustration__image" src="./images/el.jpg" alt="вид на горы сверху">
-          <figcaption class="illustration__text">
-            <h4 class="illustration__title">Гора Эльбрус</h4>
-            <button type="button" class="illustration__heart" name="likeButton"></button>
-          </figcaption>
-        </figure>
-        <figure class="illustration__item">
-          <img class="illustration__image" src="./images/dom.jpg" alt="ледник">
-          <figcaption class="illustration__text">
-            <h4 class="illustration__title">Домбай</h4>
-            <button type="button" class="illustration__heart" name="likeButton"></button>
-          </figcaption>
-        </figure>
-        <figure class="illustration__item">
-          <img class="illustration__image" src="./images/karach.jpg" alt="альпинисты">
-          <figcaption class="illustration__text">
-            <h4 class="illustration__title">Карачаево-Черкесия</h4>
-            <button type="button" class="illustration__heart" name="likeButton"></button>
-          </figcaption>
-        </figure>
       </section>
       </main>
       <footer class="footer">
         <p class="footer__place">&#169; 2020. Mesto Russia</p>
       </footer>
-      <section class="popup">
+      <section class="popup popup_type_edit-profile">
         <div class="popup__container">
           <form class="popup__form" name="form">
             <button type="reset" class="popup__close-button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <input name="name" class="popup__input popup__input_name" type="text">
-            <input name="job" class="popup__input popup__input_job" type="text">
+            <input name="name" class="popup__input popup__input_name" placeholder="Имя" type="text">
+            <input name="job" class="popup__input popup__input_job" placeholder="Профессия" type="text">
             <button type="submit" class="popup__save-button">Сохранить</button>
           </form>
         </div>
       </section>
+      <section class="popup popup_type_add-card">
+        <div class="popup__container">
+          <form class="popup__form" name="form"></form>
+            <button type="reset" class="popup__close-button"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <input name="place" class="popup__input popup__input_type_place" placeholder="Название" type="text">
+            <input name="url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" type="text">
+            <button type="submit" class="popup__save-button">Создать</button>
+          </form>
+        </div>
+      </section>
+      <section class="popup popup_type_image">
+        <div class="popup__container popup__container_type_image">
+          <button type="reset" class="popup__close-button"></button>
+          <figure class="popup__figure">
+            <img class="popup__image" src="">
+            <figcaption class="popup__figcapture"></figcaption>
+          </figure>
+        </div>
+      </section>
     </div>
+    <template class="template-card">
+      <figure class="illustration__item">
+        <button type="button" class="illustration__del-button" name="deleteButton"></button>
+        <img class="illustration__image" src="">
+        <figcaption class="illustration__text">
+          <h4 class="illustration__title"></h4>
+          <button type="button" class="illustration__heart" name="likeButton"></button>
+        </figcaption>
+      </figure>
+    </template>
     <script src="./script/script.js"></script>
   </body>
 </html>
