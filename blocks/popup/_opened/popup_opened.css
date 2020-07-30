@@ -1,9 +1,5 @@
 .popup_opened{
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  width: 100%;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
