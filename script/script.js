@@ -12,7 +12,6 @@ const popupClose = editPopup.querySelector(".popup__close-button");
 const addPopupClose = addPopup.querySelector(".popup__close-button");
 const imageCloseButton = imagePopup.querySelector(".popup__close-button");
 
-const popupOpened = document.querySelector(".popup");
 const editForm = editPopup.querySelector(".popup__form");
 const addForm = addPopup.querySelector(".popup__form");
 
@@ -30,8 +29,8 @@ const imagePopupImg = imagePopup.querySelector(".popup__image");
 const imagePopupFigcapture = imagePopup.querySelector(".popup__figcapture");
 
 
-
-const cardTemplate = document.querySelector(".template-card").content.querySelector(".illustration__item"); // темплейт элемент на странице
+// темплейт элемент на странице
+const cardTemplate = document.querySelector(".template-card").content.querySelector(".illustration__item"); 
 
 const initialCards = [
   {
@@ -48,7 +47,7 @@ const initialCards = [
   },
   {
       name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      link: 'https://traveltimes.ru/wp-content/uploads/2021/05/d902d2010ebf12b712de6c4d950c5691.jpg'
   },
   {
       name: 'Холмогорский район',
@@ -56,7 +55,7 @@ const initialCards = [
   },
   {
       name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+      link: 'https://mospravda.ru/wp-content/uploads/2016/12/Байкал.jpg'
   }
 ];
 
@@ -117,8 +116,6 @@ addButton.addEventListener("click", () => {
   togglePopup(addPopup);
 });
 
-
-
 //заполнение первой модалки
 function showClick() {
   togglePopup(editPopup);
@@ -126,17 +123,32 @@ function showClick() {
   jobInput.value = profileSubTitle.textContent;
 }
 
-
-//закрытие первой модалки
+//закрытие  модалки
 function closeForm(popup) {
-  popupOpened.classList.remove("popup_opened");
+  popup.classList.remove("popup_opened");
 }
 
-// открытие-закрытие второй модалки
+// переключение  модалки
 function togglePopup(popup) {
   popup.classList.toggle("popup_opened");
 }
 
+
+// закрытие модалки по Esc
+function closePopupEsc (evt) {
+  if (evt.key === "Escape") {
+    //const popupOpened = document.querySelector(".popup_opened");
+    closeForm(popupOpened);
+    }
+}
+
+// закрытие модалки по клику
+function closePopupClick (evt) {
+  if (evt.target.classList.contains("popup")) {
+    const popupOpened = document.querySelector(".popup_opened");  
+    closeForm(popupOpened);
+  }
+}
 
 //сохранение данных профиля
 function formElementSubmitHandler(evt) {
@@ -147,15 +159,21 @@ function formElementSubmitHandler(evt) {
 }
 
 //слушатели событий
-popupClose.addEventListener("click", closeForm);
-editForm.addEventListener("submit", formElementSubmitHandler);
-editButton.addEventListener("click", showClick);
-addForm.addEventListener("submit", addCard);
+popupClose.addEventListener("click", () => {
+  closeForm(popup);
+});
 
 addPopupClose.addEventListener('click', () => {
-  togglePopup(addPopup);
+  closeForm(addPopup);
 });
 
 imageCloseButton.addEventListener('click', () => {
-  togglePopup(imagePopup);
+  closeForm(imagePopup);
 });
+
+document.addEventListener("keyup", closePopupEsc);
+document.addEventListener("mousedown", closePopupClick);
+
+editForm.addEventListener("submit", formElementSubmitHandler);
+editButton.addEventListener("click", showClick);
+addForm.addEventListener("submit", addCard);
