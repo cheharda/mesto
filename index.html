@@ -35,9 +35,9 @@
             <button type="reset" class="popup__close-button"></button>  
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__form-fildset">
-              <input name="name" type="text" class="popup__input popup__input_name" placeholder="Имя" id="name-input" type="text" minlength="2" maxlength="40" required>
+              <input name="name" type="text" class="popup__input popup__input_name" placeholder="Имя" id="name-input" minlength="2" maxlength="40" required>
               <span class="popup__input_error" id="name-input-error"></span>
-              <input name="job" type="text" class="popup__input popup__input_job" placeholder="Профессия" id="job-input" type="text" minlength="2" maxlength="200" required>
+              <input name="job" type="text" class="popup__input popup__input_job" placeholder="Профессия" id="job-input" minlength="2" maxlength="200" required>
               <span class="popup__input_error" id="job-input-error"></span>
               <button type="submit" class="popup__save-button">Сохранить</button>
             </fieldset>
@@ -50,11 +50,11 @@
             <button type="reset" class="popup__close-button"></button>
             <h2 class="popup__title">Новое место</h2>
             <fieldset class="popup__form-fildset">
-              <input name="place" type="text" class="popup__input popup__input_place" placeholder="Название" id="place-input" type="text" minlength="2" maxlength="30" required>
+              <input name="place" type="text" class="popup__input popup__input_place" placeholder="Название" id="place-input" minlength="2" maxlength="30" required>
               <span class="popup__input_error" id="place-input-error"></span>
-              <input name="url" type="url" class="popup__input popup__input_url" placeholder="Ссылка на картинку" id="url-input" type="text" required>
+              <input name="url" type="url" class="popup__input popup__input_url" placeholder="Ссылка на картинку" id="url-input" required>
               <span class="popup__input_error" id="url-input-error"></span>
-              <input type="submit" value="Создать" class="popup__save-button"></input>
+              <input type="submit" value="Создать" class="popup__save-button">
             </fieldset>
           </form>
         </div>
@@ -63,7 +63,7 @@
         <div class="popup__container popup__container_type_image">
           <button type="reset" class="popup__close-button"></button>
           <figure class="popup__figure">
-            <img class="popup__image" src="">
+            <img class="popup__image">
             <figcaption class="popup__figcapture"></figcaption>
           </figure>
         </div>
@@ -72,7 +72,7 @@
     <template class="template-card">
       <figure class="illustration__item">
         <button type="button" class="illustration__del-button" name="deleteButton"></button>
-        <img class="illustration__image" src="">
+        <img class="illustration__image">
         <figcaption class="illustration__text">
           <h4 class="illustration__title"></h4>
           <button type="button" class="illustration__heart" name="likeButton"></button>
