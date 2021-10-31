@@ -12,6 +12,7 @@ const popupClose = editPopup.querySelector(".popup__close-button");
 const addPopupClose = addPopup.querySelector(".popup__close-button");
 const imageCloseButton = imagePopup.querySelector(".popup__close-button");
 
+
 const editForm = editPopup.querySelector(".popup__form");
 const addForm = addPopup.querySelector(".popup__form");
 
@@ -22,6 +23,8 @@ const profileInfo = document.querySelector(".profile__info");
 const profileTitle = profileInfo.querySelector(".profile__title");
 const profileSubTitle = profileInfo.querySelector(".profile__subtitle");
 
+
+
 const inputPlace = document.querySelector(".popup__input_place");
 const inputUrl = document.querySelector(".popup__input_url");
 
@@ -29,6 +32,8 @@ const imagePopupImg = imagePopup.querySelector(".popup__image");
 const imagePopupFigcapture = imagePopup.querySelector(".popup__figcapture");
 
 
+
+  
 // темплейт элемент на странице
 const cardTemplate = document.querySelector(".template-card").content.querySelector(".illustration__item"); 
 
@@ -58,6 +63,8 @@ const initialCards = [
       link: 'https://mospravda.ru/wp-content/uploads/2016/12/Байкал.jpg'
   }
 ];
+
+
 
 //удаление карточки
 const deleteCard = (evt) => {
@@ -137,7 +144,7 @@ function togglePopup(popup) {
 // закрытие модалки по Esc
 function closePopupEsc (evt) {
   if (evt.key === "Escape") {
-    //const popupOpened = document.querySelector(".popup_opened");
+    const popupOpened = document.querySelector(".popup_opened");
     closeForm(popupOpened);
     }
 }
@@ -177,3 +184,9 @@ document.addEventListener("mousedown", closePopupClick);
 editForm.addEventListener("submit", formElementSubmitHandler);
 editButton.addEventListener("click", showClick);
 addForm.addEventListener("submit", addCard);
+
+
+
+
+
+
