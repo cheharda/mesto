@@ -77,16 +77,17 @@ function createCard(data) {
   const cardDeleteButton = cardElement.querySelector(".illustration__del-button");
 
   cardTitle.textContent = data.name;
+  cardImage.alt = data.name;
   cardImage.src = data.link;
 
   cardDeleteButton.addEventListener("click", deleteCard);
   cardLikeButton.addEventListener("click", likeCard);
 
   const clickImage = (evt) => {
-    evt.target.closest("illustration__item");
     imagePopupImg.src = data.link;
+    imagePopupImg.alt = data.link;
     imagePopupFigcapture.textContent = data.name;
-    togglePopup(imagePopup);
+    openPopup(imagePopup);
   };
 
     cardImage.addEventListener("click", clickImage);
@@ -105,31 +106,36 @@ initialCards.forEach(function(data) {
 function addCard(evt) {
   evt.preventDefault();
   renderCard({name: inputPlace.value, link: inputUrl.value});
-  togglePopup(addPopup);
+  openPopup(addPopup);
 }
 
 
 addButton.addEventListener("click", () => {
   inputPlace.value = "";
   inputUrl.value = "";
-  togglePopup(addPopup);
+  openPopup(addPopup);
+  togglebuttonState(addPopup, validationConfig);
 });
 
 //заполнение первой модалки
 function showClick() {
-  togglePopup(editPopup);
+  openPopup(editPopup);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubTitle.textContent;
 }
 
 //закрытие  модалки
-function closeForm(popup) {
+function closePopup(popup) {
+  document.removeEventListener("keyup", closePopupEsc);
+  document.removeEventListener("mousedown", closePopupClick);  
   popup.classList.remove("popup_opened");
 }
 
-// переключение  модалки
-function togglePopup(popup) {
-  popup.classList.toggle("popup_opened");
+// открытие  модалки
+function openPopup(popup) {
+  document.addEventListener("keyup", closePopupEsc);
+  document.addEventListener("mousedown", closePopupClick);
+  popup.classList.add("popup_opened");
 }
 
 
@@ -137,15 +143,14 @@ function togglePopup(popup) {
 function closePopupEsc (evt) {
   if (evt.key === "Escape") {
     const popupOpened = document.querySelector(".popup_opened");
-    closeForm(popupOpened);
+    closePopup(popupOpened);
     }
 }
 
 // закрытие модалки по клику
 function closePopupClick (evt) {
   if (evt.target.classList.contains("popup")) {
-    const popupOpened = document.querySelector(".popup_opened");  
-    closeForm(popupOpened);
+    closePopup(evt.target);
   }
 }
 
@@ -154,24 +159,21 @@ function formElementSubmitHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubTitle.textContent = jobInput.value;
-  togglePopup(editPopup);
+  closePopup(editPopup);
 }
 
 //слушатели событий
 popupClose.addEventListener("click", () => {
-  closeForm(popup);
+  closePopup(popup);
 });
 
 addPopupClose.addEventListener('click', () => {
-  closeForm(addPopup);
+  closePopup(addPopup);
 });
 
 imageCloseButton.addEventListener('click', () => {
-  closeForm(imagePopup);
+  closePopup(imagePopup);
 });
-
-document.addEventListener("keyup", closePopupEsc);
-document.addEventListener("mousedown", closePopupClick);
 
 editForm.addEventListener("submit", formElementSubmitHandler);
 editButton.addEventListener("click", showClick);

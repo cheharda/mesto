@@ -9,7 +9,7 @@ const config  = {
 
 function enableValidation (validationConfig) {
     const forms =  Array.from (document.querySelectorAll(validationConfig.formSelector));
-    forms.forEach((form) => formListeners(form, validationConfig));
+    forms.forEach((form) => setFormListeners(form, validationConfig));
         
     };
   
@@ -17,20 +17,20 @@ function enableValidation (validationConfig) {
     event.preventDefault();
   }    
   
-  function formListeners (form, validationConfig) {
+  function setFormListeners (form, validationConfig) {
     form.addEventListener('submit', handlSubmit);
-    form.addEventListener('input', buttonState(form, validationConfig));
-  
-    const inputs = [...form.querySelectorAll(config.inputSelector)];
+    form.addEventListener('input', togglebuttonState(form, validationConfig));
+    
+    const inputs = [...form.querySelectorAll(validationConfig.inputSelector)];
     inputs.forEach(inputElement => {
         inputElement.addEventListener('input', 
         () => handleFieldValidation(inputElement, form, validationConfig))
     })
   
-    buttonState(form, validationConfig);
+    togglebuttonState(form, validationConfig);
   } 
   
-  function buttonState(form, validationConfig) {
+  function togglebuttonState(form, validationConfig) {
     const button = form.querySelector(validationConfig.buttonSelector);
     button.disabled = !form.checkValidity();
     button.classList.toggle(validationConfig.buttonInactive, !form.checkValidity());
@@ -39,10 +39,10 @@ function enableValidation (validationConfig) {
   function handleFieldValidation(inputElement, form, validationConfig) {
     if (!inputElement.validity.valid) {
         showInputError(inputElement, form, validationConfig);
-        buttonState(form, validationConfig);
+        togglebuttonState(form, validationConfig);
       } else {
         hideInputError(inputElement, form, validationConfig);
-        buttonState(form, validationConfig);
+        togglebuttonState(form, validationConfig);
       }
   }
   
