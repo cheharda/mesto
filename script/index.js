@@ -111,10 +111,7 @@ function addCard(evt) {
 
 
 addButton.addEventListener("click", () => {
-  inputPlace.value = "";
-  inputUrl.value = "";
   openPopup(addPopup);
-  togglebuttonState(addPopup, validationConfig);
 });
 
 //заполнение первой модалки
@@ -129,6 +126,9 @@ function closePopup(popup) {
   document.removeEventListener("keyup", closePopupEsc);
   document.removeEventListener("mousedown", closePopupClick);  
   popup.classList.remove("popup_opened");
+  inputPlace.value = "";
+  inputUrl.value = "";
+  togglebuttonState(addForm, config);
 }
 
 // открытие  модалки
@@ -178,9 +178,3 @@ imageCloseButton.addEventListener('click', () => {
 editForm.addEventListener("submit", formElementSubmitHandler);
 editButton.addEventListener("click", showClick);
 addForm.addEventListener("submit", addCard);
-
-
-
-
-
-
