@@ -133,7 +133,6 @@ function closePopup(popup) {
 
 // открытие  модалки
 function openPopup(popup) {
-  popup.classList.toggle("popup_opened");
   document.addEventListener("keyup", closePopupEsc);
   document.addEventListener("mousedown", closePopupClick);
   popup.classList.add("popup_opened");
