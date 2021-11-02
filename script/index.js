@@ -106,12 +106,15 @@ initialCards.forEach(function(data) {
 function addCard(evt) {
   evt.preventDefault();
   renderCard({name: inputPlace.value, link: inputUrl.value});
-  openPopup(addPopup);
+  inputPlace.value = "";
+  inputUrl.value = "";
+  closePopup(addPopup);
 }
 
 
 addButton.addEventListener("click", () => {
   openPopup(addPopup);
+  togglebuttonState(addForm, config);
 });
 
 //заполнение первой модалки
@@ -126,13 +129,11 @@ function closePopup(popup) {
   document.removeEventListener("keyup", closePopupEsc);
   document.removeEventListener("mousedown", closePopupClick);  
   popup.classList.remove("popup_opened");
-  inputPlace.value = "";
-  inputUrl.value = "";
-  togglebuttonState(addForm, config);
 }
 
 // открытие  модалки
 function openPopup(popup) {
+  popup.classList.toggle("popup_opened");
   document.addEventListener("keyup", closePopupEsc);
   document.addEventListener("mousedown", closePopupClick);
   popup.classList.add("popup_opened");
