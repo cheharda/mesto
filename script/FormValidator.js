@@ -8,7 +8,7 @@ const config  = {
 };
 
 class FormValidator {
-  constructor(config) {
+  constructor(config, form) {
     this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
     this._inputTypeError = config.inputTypeError;
@@ -16,13 +16,19 @@ class FormValidator {
     this._buttonSelector = config.buttonSelector;
     this._buttonInactive = config.buttonInactive;
     this._config = config;
+    this._formElement = form;
 
   }
 
-  enableValidation (config) {
-    const forms =  Array.from (document.querySelectorAll(this._formSelector));
-    forms.forEach((form) => this._setFormListeners(form, config));        
-    };  
+  enableValidation () {
+      this._setFormListeners(this._formElement);
+      this._formElement.addEventListener('submit', (evt) => {
+          evt.preventDefault();
+      });
+  };
+    // const forms =  Array.from (document.querySelectorAll(this._formSelector));
+    // forms.forEach((form) => this._setFormListeners(form));     
+    //};  
 
   _showInputError(inputElement) { 
     this._errorElement = document.querySelector(`#${inputElement.id}-error`);

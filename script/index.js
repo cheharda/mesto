@@ -86,8 +86,7 @@ initialCards.forEach(item => {
 
 //функция создания карточки
 function createCard (item) {
-  const cardTemplate = document.querySelector(".template-card");
-  const card = new Card(item, cardTemplate, handleCardClick);
+  const card = new Card(item, ".template-card", openPopup, imagePopup);
   return card.renderCard();
 }
 
@@ -153,12 +152,13 @@ function formElementSubmitHandler(evt) {
   closePopup(editPopup);
 }
 
-function handleCardClick (link, name) {
-    imagePopupImg.src = link;
-    imagePopupImg.alt = link;
-    imagePopupFigcapture.textContent = name;
-  openPopup(imagePopup);
-}
+//открытие картинки
+// function handleCardClick (link, name) {
+//     imagePopupImg.src = link;
+//     imagePopupImg.alt = link;
+//     imagePopupFigcapture.textContent = name;
+//   openPopup(imagePopup);
+// }
 
 //слушатели событий
 addButton.addEventListener("click", () => {
