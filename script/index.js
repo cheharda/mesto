@@ -1,3 +1,16 @@
+
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
+const config  = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  inputTypeError: 'popup__input_type_error',
+  buttonSelector: '.popup__save-button',
+  buttonInactive: 'button_inactive', 
+  inputError: 'popup__input_error',
+};
+
 const editPopup = document.querySelector(".popup_type_edit-profile");
 const addPopup = document.querySelector(".popup_type_add-card");
 const imagePopup = document.querySelector(".popup_type_image");
@@ -27,9 +40,6 @@ const inputUrl = document.querySelector(".popup__input_url");
 
 const imagePopupImg = imagePopup.querySelector(".popup__image");
 const imagePopupFigcapture = imagePopup.querySelector(".popup__figcapture");
-  
-// темплейт элемент на странице
-const cardTemplate = document.querySelector(".template-card").content.querySelector(".illustration__item"); 
 
 const initialCards = [
   {
@@ -58,70 +68,51 @@ const initialCards = [
   }
 ];
 
-//удаление карточки
-const deleteCard = (evt) => {
-  evt.target.closest(".illustration__item").remove();
-};
+//перебор первоначальных карточек
+initialCards.forEach(item => {
+  const cardElement = createCard(item);
+  renderCard(cardElement);
+});
 
-//лайк карточки
-const likeCard = (evt) => {
-  evt.target.classList.toggle("illustration__heart_active");
-};
+//функция добавления карточки
+function renderCard(cardElement) {
+  list.prepend(cardElement);
+}
+
+//перебор первоначальных карточек
+initialCards.forEach(item => {
+  createCard(item);
+});
 
 //функция создания карточки
-function createCard(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".illustration__image");
-  const cardTitle = cardElement.querySelector(".illustration__title");
-  const cardLikeButton = cardElement.querySelector(".illustration__heart");
-  const cardDeleteButton = cardElement.querySelector(".illustration__del-button");
-
-  cardTitle.textContent = data.name;
-  cardImage.alt = data.name;
-  cardImage.src = data.link;
-
-  cardDeleteButton.addEventListener("click", deleteCard);
-  cardLikeButton.addEventListener("click", likeCard);
-
-  const clickImage = (evt) => {
-    imagePopupImg.src = data.link;
-    imagePopupImg.alt = data.link;
-    imagePopupFigcapture.textContent = data.name;
-    openPopup(imagePopup);
-  };
-
-    cardImage.addEventListener("click", clickImage);
-    return cardElement;
+function createCard (item) {
+  const cardTemplate = document.querySelector(".template-card");
+  const card = new Card(item, cardTemplate, handleCardClick);
+  return card.renderCard();
 }
-
-function renderCard(data) {
-  list.prepend(createCard(data));
-}
-
-initialCards.forEach(function(data) {
-  renderCard(data);
-});
 
 //функция добавления новой карточки
 function addCard(evt) {
   evt.preventDefault();
-  renderCard({name: inputPlace.value, link: inputUrl.value});
+  renderCard(
+    createCard(
+      {
+        link: inputUrl.value,
+        name: inputPlace.value
+      }
+    )
+    );
   inputPlace.value = "";
   inputUrl.value = "";
   closePopup(addPopup);
 }
-
-
-addButton.addEventListener("click", () => {
-  openPopup(addPopup);
-  togglebuttonState(addForm, config);
-});
 
 //заполнение первой модалки
 function showClick() {
   openPopup(editPopup);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubTitle.textContent;
+  editProfileFormValidator.disableSubmitButton(editPopup);
 }
 
 //закрытие  модалки
@@ -162,7 +153,19 @@ function formElementSubmitHandler(evt) {
   closePopup(editPopup);
 }
 
+function handleCardClick (link, name) {
+    imagePopupImg.src = link;
+    imagePopupImg.alt = link;
+    imagePopupFigcapture.textContent = name;
+  openPopup(imagePopup);
+}
+
 //слушатели событий
+addButton.addEventListener("click", () => {
+  openPopup(addPopup);
+  addCardFormValidator.disableSubmitButton(addPopup);
+});
+
 popupClose.addEventListener("click", () => {
   closePopup(popup);
 });
@@ -178,3 +181,9 @@ imageCloseButton.addEventListener('click', () => {
 editForm.addEventListener("submit", formElementSubmitHandler);
 editButton.addEventListener("click", showClick);
 addForm.addEventListener("submit", addCard);
+
+const editProfileFormValidator = new FormValidator(config, editForm);
+const addCardFormValidator = new FormValidator(config, addForm);
+
+editProfileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
