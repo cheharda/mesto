@@ -54,13 +54,11 @@ class Card {
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
 		this._element.querySelector(".illustration__title").textContent = this._name;
-        this._deleteButton;
-        this._likeButton;
+//        this._deleteButton;
+//        this._likeButton;
         
 		return this._element;
 	}
-
-    
 }
 
 export default Card;

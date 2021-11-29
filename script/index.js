@@ -152,14 +152,6 @@ function formElementSubmitHandler(evt) {
   closePopup(editPopup);
 }
 
-//открытие картинки
-// function handleCardClick (link, name) {
-//     imagePopupImg.src = link;
-//     imagePopupImg.alt = link;
-//     imagePopupFigcapture.textContent = name;
-//   openPopup(imagePopup);
-// }
-
 //слушатели событий
 addButton.addEventListener("click", () => {
   openPopup(addPopup);
