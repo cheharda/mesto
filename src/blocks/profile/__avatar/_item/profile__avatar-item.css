@@ -1,4 +1,4 @@
-.profile__avatar_item{
+.profile__avatar-item{
     width: 120px;
     height: 120px;
     position: relative;
@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 
-.profile__avatar_item:before {
+.profile__avatar-item:before {
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -22,7 +22,7 @@
     min-height: 18px;
 }
 
-.profile__avatar_item:hover:before {
+.profile__avatar-item:hover:before {
 	z-index: 0;
 	opacity: 0.8;
 	transition: opacity 0.5s ease;

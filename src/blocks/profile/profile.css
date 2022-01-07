@@ -5,7 +5,7 @@
 @import url(./__add-button/profile__add-button.css);
 @import url(./__edit-button/profile__edit-button.css);
 @import url(./__headings/profile__headings.css);
-@import url(./__avatar/_item/profile__avatar_item.css);
+@import url(./__avatar/_item/profile__avatar-item.css);
 
 .profile{
   margin: 0 auto;
