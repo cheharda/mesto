@@ -12,7 +12,9 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar" src="<%=require('./images/kusto.png')%>" alt="Фотография Жака Кусто в красной шапочке">
+          <figure class="profile__avatar_item">
+            <img class="profile__avatar" src="<%=require('./images/kusto.png')%>" alt="Фотография аватара">
+          </figure>
           <div class="profile__info">
             <div class="profile__headings">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -28,6 +30,19 @@
       <footer class="footer">
         <p class="footer__place">&#169; 2021. Mesto Russia</p>
       </footer>
+      <section class="popup popup_type_avatar">
+        <div class="popup__container">  
+          <form class="popup__form" name="form" novalidate>
+            <button type="reset" class="popup__close-button"></button>  
+            <h2 class="popup__title">Обновить аватар</h2>
+            <fieldset class="popup__form-fildset">
+              <input name="avatar" type="url" class="popup__input popup__input_url_avatar" placeholder="https://somewebsite.com/someimage.jpg" id="avatar-input" minlength="2" maxlength="200" required>
+              <span class="popup__input popup__input_error" id="url-avatar" required></span>
+              <button type="submit" class="popup__save-button">Сохранить</button>
+            </fieldset>
+          </form>
+        </div>
+      </section>
       <section class="popup popup_type_edit-profile">
         <div class="popup__container">  
           <form class="popup__form" name="form" novalidate>
@@ -58,6 +73,15 @@
           </form>
         </div>
       </section>
+      <section class="popup popup_type_confirm">
+        <div class="popup__container">
+          <form class="popup__form" name="form" novalidate>
+            <button type="reset" class="popup__close-button"></button>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button type="submit" class="popup__save-button">Да</button>
+          </form>
+        </div>
+      </section>
       <section class="popup popup_type_image">
         <div class="popup__container popup__container_type_image">
           <button type="reset" class="popup__close-button"></button>
@@ -74,7 +98,10 @@
         <img class="illustration__image">
         <figcaption class="illustration__text">
           <h4 class="illustration__title"></h4>
-          <button type="button" class="illustration__heart" name="likeButton"></button>
+          <div class="illustration__place">
+            <button type="button" class="illustration__heart" name="likeButton"></button>
+            <span class="illustration__counter">0</span>
+          </div>
         </figcaption>
       </figure>
     </template>

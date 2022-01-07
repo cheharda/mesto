@@ -6,99 +6,171 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import './index.css'
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
+import DeletePopup from '../components/DeletePopup.js';
 
-import {editPopup, 
+import {
+  apiConfig, 
+  avatar,
+  editPopup, 
   addPopup, 
+  avatarPopup,
+  confirmPopup,
   editButton, 
   addButton,
   editForm,
   addForm,
-  inputPlace,
-  inputUrl,
+  avatarForm,
+  avatarButton,
+  inputAvatar,
   containerSelector,
   editPopupSelector, 
   addPopupSelector,
   imagePopupSelector,
+  confirmPopupSelector,
+  avatarPopupSelector,
   nameSelector,
   jobSelector,
   nameInput, 
   jobInput,
   config} from '../ utils/constants.js';
 
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://traveltimes.ru/wp-content/uploads/2021/05/d902d2010ebf12b712de6c4d950c5691.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://mospravda.ru/wp-content/uploads/2016/12/Байкал.jpg'
-  }
-];
+const api = new Api(apiConfig);
+
+const userInfo = new UserInfo(nameSelector, jobSelector, avatar);
+
+let userId = null;
+const getUserInfoFromServer = api.getUserFromServer();
+getUserInfoFromServer.then((data) => {
+    userId = data._id;
+})
+.catch((err) => alert(err));
 
 const section = new Section({
-  items: initialCards, 
   renderer: (item) => {
     section.addItem(createCard(item).renderCard());
   }
 }, containerSelector);
 
-section.renderItems();
-
-const userInfo = new UserInfo({nameSelector, jobSelector});
-
 const popupUserInfo = new PopupWithForm (editPopupSelector, {
   formSubmit: (data) => {
-    userInfo.setUserInfo(data);
-    popupUserInfo.close();
-  }
+    popupUserInfo.toggleButtonText('Сохранение...')
+    api.editProfileUser(data)
+    .then(
+      data => {
+        userInfo.setUserInfo(data);
+        popupUserInfo.close();
+        popupUserInfo.toggleButtonText('Сохранить')
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  } 
 });
+
+
+Promise.all([api.getUserFromServer(), api.getCardsFromServer()])
+  .then(result => {
+    userInfo.setUserInfo(result[0]);
+    section.renderItems(result[1]); 
+  })
+  .catch((err) => {
+    console.error(err)
+  }
+  );
+
 popupUserInfo.setEventListeners();
 
 const addPopupForm = new PopupWithForm(addPopupSelector, {
-  formSubmit: (event) => {
-    const card = createCard({
-        link: inputUrl.value,
-        name: inputPlace.value,
-        alt: inputPlace.value,
-      })
+  formSubmit: (formData) => {
+    addPopupForm.toggleButtonText('Сохранение...');
+    api.postCardsOnServer(formData).then( data => {
+      const card = createCard(data)
       section.addItem(card.renderCard());
       addPopupForm.close();
+      addPopupForm.toggleButtonText('Сохранить');
+    })
+    .catch((err) => {
+      console.error(err)
+    })
   }}
 );
 
 addPopupForm.setEventListeners();
 
 const popupImage = new PopupWithImage(imagePopupSelector);
+
 popupImage.setEventListeners();
 
-//открытие попапа с картинкой 
+const popupAvatar = new PopupWithForm (avatarPopupSelector, {
+  formSubmit: (data) => {
+    popupAvatar.toggleButtonText('Сохранение...')
+    api.editProfileAvatar(data)
+    .then(
+      data => {
+        userInfo.setUserInfo(data);
+        popupAvatar.close();
+        popupAvatar.toggleButtonText('Сохранить')
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
+});
+
+popupAvatar.setEventListeners();
+
+const deletePopup = new DeletePopup (confirmPopupSelector, {
+  formSubmit: ({cardId, cardItem}) => {
+    api.deleteCard(cardId).then(() => {
+      deletePopup.close();
+      cardItem.remove();
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
+    });
+
 function handleCardClick(name, link) {
   popupImage.open(name, link);
 }
 
+function handleDeleteCardClick(cardId, cardItem) {
+  deletePopup.open({cardId, cardItem})
+  deletePopup.setEventListeners();
+}
+
+
+function handleAddLike (cardId, card) {
+  api.makeLike(cardId).then((res) => {
+    card.likesCount(res.likes.length);
+    card.likeCard();
+  })
+  .catch((err) => console.error(err))  
+}
+
+
+function handleRemoveLike (cardId, card) {
+  api.deleteLike(cardId).then((res) => {
+    card.likesCount(res.likes.length);
+    card.likeCard();
+  })
+  .catch((err) => console.error(err))
+}
+
 //функция создания карточки
 function createCard (item) {
-  const card = new Card(item, ".template-card", handleCardClick);
+  const card = new Card({item, userId, handleCardClick, handleDeleteCardClick, handleAddLike, handleRemoveLike}, ".template-card");
   return card;
 }
 
+avatarButton.addEventListener("click", () => {
+  avatarFormValidator.disableSubmitButton(avatarPopup);
+  popupAvatar.open();
+  const userData = userInfo.getUserInfo();
+  inputAvatar.value = userData.avatar.src; 
+});
 
 addButton.addEventListener("click", () => {
   addCardFormValidator.disableSubmitButton(addPopup);
@@ -109,12 +181,15 @@ editButton.addEventListener("click", function() {
   editProfileFormValidator.disableSubmitButton(editPopup);
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name
-  jobInput.value = userData.job;
+  jobInput.value = userData.about;
   popupUserInfo.open();
 });
 
 const editProfileFormValidator = new FormValidator(config, editForm);
 const addCardFormValidator = new FormValidator(config, addForm);
+const avatarFormValidator = new FormValidator(config, avatarForm);
 
 editProfileFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
+

@@ -1,0 +1,7 @@
+.illustration__place{
+    display: flex;
+    flex-direction: column;
+    margin-right: 22px;
+    align-items: center;
+    width: 21px;
+}
