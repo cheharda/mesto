@@ -1,9 +1,11 @@
 @import url(./__image/illustration__image.css);
 @import url(./__item/illustration__item.css);
 @import url(./__text/illustration__text.css);
+@import url(./__place/illustration__place.css);
 @import url(./__heart/illustration__heart.css);
 @import url(./__title/illustration__title.css);
 @import url(./__heart/illustration__heart.css);
+@import url(./__counter/illustration__counter.css);
 @import url(./__del-button/illustration__del-button.css);
 @import url(./__heart/_active/illustration__heart_active.css);
 

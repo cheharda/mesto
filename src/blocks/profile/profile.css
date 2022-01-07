@@ -5,6 +5,7 @@
 @import url(./__add-button/profile__add-button.css);
 @import url(./__edit-button/profile__edit-button.css);
 @import url(./__headings/profile__headings.css);
+@import url(.//__avatar/_item/profile__avatar_item.css);
 
 .profile{
   margin: 0 auto;
@@ -14,7 +15,7 @@
   flex-direction: row;
 }
 
-@media screen and (max-width: 667px) {
+@media screen and (max-width: 730px) {
   .profile{
     flex-direction: column;
     margin-top: 38px;
