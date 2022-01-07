@@ -33,7 +33,7 @@ import {
   jobSelector,
   nameInput, 
   jobInput,
-  config} from '../ utils/constants.js';
+  config} from '../utils/constants.js';
 
 const api = new Api(apiConfig);
 
