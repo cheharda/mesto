@@ -39,13 +39,6 @@ const api = new Api(apiConfig);
 
 const userInfo = new UserInfo(nameSelector, jobSelector, avatar);
 
-let userId = null;
-const getUserInfoFromServer = api.getUserFromServer();
-getUserInfoFromServer.then((data) => {
-    userId = data._id;
-})
-.catch((err) => alert(err));
-
 const section = new Section({
   renderer: (item) => {
     section.addItem(createCard(item).renderCard());
@@ -60,19 +53,22 @@ const popupUserInfo = new PopupWithForm (editPopupSelector, {
       data => {
         userInfo.setUserInfo(data);
         popupUserInfo.close();
-        popupUserInfo.toggleButtonText('Сохранить')
       })
       .catch((err) => {
         console.error(err)
       })
+      .finally(() => {
+        popupUserInfo.toggleButtonText('Сохранить');
+      });
   } 
 });
 
-
+let userId = null; 
 Promise.all([api.getUserFromServer(), api.getCardsFromServer()])
   .then(result => {
     userInfo.setUserInfo(result[0]);
-    section.renderItems(result[1]); 
+    section.renderItems(result[1]);
+    userId = result[0]._id; 
   })
   .catch((err) => {
     console.error(err)
@@ -88,11 +84,13 @@ const addPopupForm = new PopupWithForm(addPopupSelector, {
       const card = createCard(data)
       section.addItem(card.renderCard());
       addPopupForm.close();
-      addPopupForm.toggleButtonText('Сохранить');
     })
     .catch((err) => {
       console.error(err)
     })
+    .finally(() => {
+      addPopupForm.toggleButtonText('Сохранить');
+    });
   }}
 );
 
@@ -110,11 +108,13 @@ const popupAvatar = new PopupWithForm (avatarPopupSelector, {
       data => {
         userInfo.setUserInfo(data);
         popupAvatar.close();
-        popupAvatar.toggleButtonText('Сохранить')
       })
       .catch((err) => {
         console.error(err)
       })
+      .finally(() => {
+        popupAvatar.toggleButtonText('Сохранить');
+      });
   }
 });
 
@@ -138,8 +138,8 @@ function handleCardClick(name, link) {
 
 function handleDeleteCardClick(cardId, cardItem) {
   deletePopup.open({cardId, cardItem})
-  deletePopup.setEventListeners();
 }
+deletePopup.setEventListeners();
 
 
 function handleAddLike (cardId, card) {
@@ -168,8 +168,6 @@ function createCard (item) {
 avatarButton.addEventListener("click", () => {
   avatarFormValidator.disableSubmitButton(avatarPopup);
   popupAvatar.open();
-  const userData = userInfo.getUserInfo();
-  inputAvatar.value = userData.avatar.src; 
 });
 
 addButton.addEventListener("click", () => {
