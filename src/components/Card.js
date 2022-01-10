@@ -5,6 +5,7 @@ class Card {
         this._name = item.name;
         this._userId = userId;
         this._likes = item.likes;
+        this._ownerId = item.owner._id;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._handleDeleteCardClick = handleDeleteCardClick;
@@ -15,13 +16,14 @@ class Card {
         content.
         querySelector(".illustration__item")
         .cloneNode(true);
+
         this._deleteButton = this._element.querySelector(".illustration__del-button");
 
     }
 
     _addListeners() {
         this._deleteButton.addEventListener('click', () => {
-            this._handleDeleteCardClick(this._item._id, this._element);
+                this._handleDeleteCardClick(this._item._id, this._element);
         });
 
         this._likeButton = this._element.querySelector(".illustration__heart");
@@ -53,18 +55,23 @@ class Card {
         this._likeButton.classList.toggle("illustration__heart_active");
     }
 
+    _validateDeleteButton() {
+//        console.log(this._ownerId);
+//        console.log(this._userId);
+        if(this._ownerId !== this._userId) {
+            this._deleteButton.remove();
+        }
+    }
+
     renderCard() {
         this._likeCounter = this._element.querySelector('.illustration__counter');
         this.likesCount(this._likes.length);
+        this._deleteButton = this._element.querySelector(".illustration__del-button");
+        this._validateDeleteButton();
         this._cardImage = this._element.querySelector(".illustration__image");
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
 		this._element.querySelector(".illustration__title").textContent = this._name;
-        if(this._item.owner._id == this._userId) {
-            this._deleteButton;
-        } else {
-            this._deleteButton.remove();
-        }
 
         this._addListeners();
         

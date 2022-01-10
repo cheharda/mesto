@@ -24,13 +24,11 @@ class FormValidator {
     this._errorElement = document.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputTypeError);
     this._errorElement.textContent = inputElement.validationMessage;
-    this._errorElement.classList.add(this._inputError);
   } 
 
   _hideInputError(inputElement) {
     this._errorElement = document.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputTypeError);
-    this._errorElement.classList.remove(this._inputError);
     this._errorElement.textContent = '';  
   }
 

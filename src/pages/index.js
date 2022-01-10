@@ -15,14 +15,12 @@ import {
   editPopup, 
   addPopup, 
   avatarPopup,
-  confirmPopup,
   editButton, 
   addButton,
   editForm,
   addForm,
   avatarForm,
   avatarButton,
-  inputAvatar,
   containerSelector,
   editPopupSelector, 
   addPopupSelector,
@@ -63,12 +61,11 @@ const popupUserInfo = new PopupWithForm (editPopupSelector, {
   } 
 });
 
-let userId = null; 
+
 Promise.all([api.getUserFromServer(), api.getCardsFromServer()])
   .then(result => {
     userInfo.setUserInfo(result[0]);
     section.renderItems(result[1]);
-    userId = result[0]._id; 
   })
   .catch((err) => {
     console.error(err)
@@ -122,7 +119,6 @@ popupAvatar.setEventListeners();
 
 const deletePopup = new DeletePopup (confirmPopupSelector, {
   formSubmit: ({cardId, cardItem}) => {
-    console.log(cardId);
     api.deleteCard(cardId).then(() => {
       deletePopup.close();
       cardItem.remove();
@@ -160,9 +156,18 @@ function handleRemoveLike (cardId, card) {
   .catch((err) => console.error(err))
 }
 
+let userId = userInfo.getUserId;
+
 //функция создания карточки
 function createCard (item) {
-  const card = new Card({item, userId, handleCardClick, handleDeleteCardClick, handleAddLike, handleRemoveLike}, ".template-card");
+  const card = new Card({
+    item, 
+    userId: userInfo.getUserId(), 
+    handleCardClick, 
+    handleDeleteCardClick, 
+    handleAddLike, 
+    handleRemoveLike
+  }, ".template-card");
   return card;
 }
 

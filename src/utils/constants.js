@@ -23,8 +23,6 @@ export const editForm = editPopup.querySelector(".popup__form");
 export const addForm = addPopup.querySelector(".popup__form");
 export const avatarForm = avatarPopup.querySelector(".popup__form");
 
-export const inputAvatar = document.querySelector(".popup__input_url_avatar");
-
 export const nameInput = document.querySelector(".popup__input_name");
 export const jobInput = document.querySelector(".popup__input_job");
 

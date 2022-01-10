@@ -20,9 +20,7 @@ export default class UserInfo {
         this._id = data._id;
     }
 
-    getUserId(data) {
-        return this._id = data._id;
-
-
+    getUserId() {
+        return this._id;
       }
 }
