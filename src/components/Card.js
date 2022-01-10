@@ -4,6 +4,7 @@ class Card {
         this._link = item.link;
         this._name = item.name;
         this._userId = userId;
+        this._likes = item.likes;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._handleDeleteCardClick = handleDeleteCardClick;
@@ -54,6 +55,7 @@ class Card {
 
     renderCard() {
         this._likeCounter = this._element.querySelector('.illustration__counter');
+        this.likesCount(this._likes.length);
         this._cardImage = this._element.querySelector(".illustration__image");
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;

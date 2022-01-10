@@ -41,13 +41,13 @@ const userInfo = new UserInfo(nameSelector, jobSelector, avatar);
 
 const section = new Section({
   renderer: (item) => {
-    section.addItem(createCard(item).renderCard());
+    section.appendItem(createCard(item).renderCard());
   }
 }, containerSelector);
 
 const popupUserInfo = new PopupWithForm (editPopupSelector, {
   formSubmit: (data) => {
-    popupUserInfo.toggleButtonText('Сохранение...')
+    popupUserInfo.toggleButtonText('Сохранение...');
     api.editProfileUser(data)
     .then(
       data => {
@@ -102,7 +102,7 @@ popupImage.setEventListeners();
 
 const popupAvatar = new PopupWithForm (avatarPopupSelector, {
   formSubmit: (data) => {
-    popupAvatar.toggleButtonText('Сохранение...')
+    popupAvatar.toggleButtonText('Сохранение...');
     api.editProfileAvatar(data)
     .then(
       data => {
@@ -122,6 +122,7 @@ popupAvatar.setEventListeners();
 
 const deletePopup = new DeletePopup (confirmPopupSelector, {
   formSubmit: ({cardId, cardItem}) => {
+    console.log(cardId);
     api.deleteCard(cardId).then(() => {
       deletePopup.close();
       cardItem.remove();
@@ -130,7 +131,7 @@ const deletePopup = new DeletePopup (confirmPopupSelector, {
       console.error(err)
     })
   }
-    });
+});
 
 function handleCardClick(name, link) {
   popupImage.open(name, link);

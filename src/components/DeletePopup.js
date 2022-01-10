@@ -8,7 +8,8 @@ class DeletePopup extends Popup {
     }
 
     setEventListeners() {
-        this._popupConfirm.addEventListener('submit', () => {
+        this._popupConfirm.addEventListener('submit', (event) => {
+            event.preventDefault();
           this._formSubmit(this._data);
           this.close();
         });
